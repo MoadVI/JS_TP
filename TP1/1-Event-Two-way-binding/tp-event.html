@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<title>Manipulation de vue</title>
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<style>
+	#inc, #dec, #clic{
+		padding: 10px;
+		color: white;
+		font-weight: bold;
+		margin-left: 20px;
+		margin-right: 25px;
+		background-color: blue;
+
+	}
+	.exo2, .exo3, .exo1 {
+		text-align: center;
+	}
+	.exo3 {
+		
+		font-weight: bold;
+		
+	}
+	input {
+		width: 500px;
+		height: 30px;
+	}
+</style>
+</head>
+<body>
+
+<div id="monapp">
+	<div class="exo1">
+		<h1>Exercice 1</h1>
+		<button @click="changerTitre" id="clic">{{titre}}</button>
+	</div>
+	<br>
+
+	<hr />
+	<div class="exo2">
+		<h1>Exercice 2</h1>
+		<button @click="increment" id="inc">++</button>
+		{{compteur}}
+		<button @click="decrement" id="dec">--</button>
+	</div>
+
+	<hr />
+
+
+
+
+	<div class="exo3">
+		<h1>Exercice 3</h1>
+		<input v-model="inputValue" @input="checkInput" placeholder="Entrez du texte sans espace" />
+		<p v-if="showWarning" style="color: red;font-weight: bold;font-size: 40px;">Veuillez ne pas inclure d'espace!</p>
+	</div>
+	
+</div>
+
+
+<script>
+	const appli = {
+		data () {
+				return {
+					titre:"Cliquez moi!",
+					compteur:0,
+					inputValue:"",
+					showWarning:false,
+				};
+			},
+		methods: {
+				changerTitre() {
+					this.titre = "Cliqué!";
+				},
+				increment() {
+					this.compteur++;
+				},	
+				decrement() {
+					this.compteur--;
+				},
+				checkInput() {
+					if (this.inputValue.includes(" ")) {
+						this.showWarning = true;
+					}
+					else {
+						this.showWarning = false;
+					}
+				},
+		}
+	};
+	
+Vue.createApp(appli).mount("#monapp");
+</script>
+
+</body>
+</html>
